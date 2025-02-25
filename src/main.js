@@ -5,10 +5,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 let targetLat = 47.4979, targetLng = 19.0402; // Example target location: Budapest Parliament
 
 const EARTH_RADIUS_M = 6371000;
-let camera, scene, renderer, model, light;
+
 let userLat, userLng;
-let isModelPositionSet = false;
-let isGettingLocation = true;
 
 // Convert GPS coordinates to AR coordinates (meters relative to user)
 function getARPosition(lat, lng) {
@@ -18,13 +16,12 @@ function getARPosition(lat, lng) {
 }
 
 async function init() {
-  const { scene, renderer } = setScene();
+  const { scene, camera, renderer } = setScene();
   const model = await setModel(scene, '/cemetery_angel_-_miller/scene.gltf', [0, 0, -1]);// Test by setting 1m in front
 
+  startLocationTracking(model);
+
   renderer.setAnimationLoop(() => {
-    if (!isGettingLocation) {
-      getUserLocation();
-    }
     renderer.render(scene, camera);
   });
 }
@@ -55,48 +52,41 @@ function setScene() {
   light.position.set(1, 2, 3);
   scene.add(light);
 
-  return { scene, renderer };
+  return { scene, camera, renderer };
 }
 
 // Directly request geolocation permissions and handle the response
-function getUserLocation() {
-  isGettingLocation = true;
-  // Ask for permission to access location
-  navigator.geolocation.getCurrentPosition(
+function startLocationTracking(model) {
+  if (!navigator.geolocation) {
+    alert("Geolocation is not supported by your browser.");
+    throw new Error("Geolocation API access impossible.");
+  }
+
+  navigator.geolocation.watchPosition(
     (position) => {
       userLat = position.coords.latitude;
       userLng = position.coords.longitude;
 
-      const arPos = getARPosition(targetLat, targetLng);
+      console.log(`Updated Location: ${userLat}, ${userLng}`);
 
-      // Only set the model position if it hasn't been set already
-      if (!isModelPositionSet && model) {
-        model.position.set(arPos.x, 0, arPos.z); // Position model relative to user's location
-        isModelPositionSet = true; // Mark the position as set
+      if (model) {
+        const arPos = getARPosition(targetLat, targetLng);
+        model.position.set(arPos.x, 0, arPos.z);
       }
 
-      // Adjust camera to user position (looking in the right direction)
-      camera.position.set(arPos.x, 0, arPos.z + 5); // Offset the camera for a better view
-      camera.lookAt(new THREE.Vector3(arPos.x, 0, arPos.z)); // Look at the model
-      isGettingLocation = false;
+      camera.position.set(0, 1.6, 0); // Keep camera at a natural height
+      camera.lookAt(new THREE.Vector3(0, 0, -1));
     },
     (error) => {
-      console.error(error);
-      alert("Error: Unable to retrieve your location. " + error);
+      console.error("Geolocation error:", error);
     },
     {
       enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
+      maximumAge: 0,
+      timeout: 5000
     }
   );
 }
-
-
-// Light intensity control
-document.getElementById('light-intensity').addEventListener('input', (event) => {
-  light.intensity = event.target.value;
-});
 
 // Record point control
 document.getElementById('record-point').addEventListener('click', () => {
