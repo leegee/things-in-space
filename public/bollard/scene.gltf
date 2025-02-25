@@ -1,0 +1,512 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 3642,
+      "max": [
+        1.5516620874404907,
+        1.3499019145965576,
+        0.9266890287399292
+      ],
+      "min": [
+        -1.5516620874404907,
+        -1.3499019145965576,
+        0.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 43704,
+      "componentType": 5126,
+      "count": 3642,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 3642,
+      "max": [
+        1.0,
+        0.9999979734420776,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -0.9999586343765259,
+        -0.9999995231628418,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 3642,
+      "max": [
+        0.9858434200286865,
+        0.9937052726745605
+      ],
+      "min": [
+        0.009196998551487923,
+        0.006460065953433514
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 29136,
+      "componentType": 5126,
+      "count": 3642,
+      "max": [
+        0.9858434200286865,
+        0.9937052726745605
+      ],
+      "min": [
+        0.009196998551487923,
+        0.006460065953433514
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 58272,
+      "componentType": 5126,
+      "count": 3642,
+      "max": [
+        0.9858434200286865,
+        0.9937052726745605
+      ],
+      "min": [
+        0.009196998551487923,
+        0.006460065953433514
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 11292,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 87408,
+      "componentType": 5126,
+      "count": 1036,
+      "max": [
+        0.1076657772064209,
+        0.12174837291240692,
+        1.6880125999450684
+      ],
+      "min": [
+        -0.09078028798103333,
+        -0.09078028798103333,
+        -0.10817352682352066
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 99840,
+      "componentType": 5126,
+      "count": 1036,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 58272,
+      "componentType": 5126,
+      "count": 1036,
+      "max": [
+        1.0,
+        0.9999940991401672,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -0.9999040961265564,
+        -0.9915435314178467,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 87408,
+      "componentType": 5126,
+      "count": 1036,
+      "max": [
+        0.9954120516777039,
+        0.9915895462036133
+      ],
+      "min": [
+        0.008318355306982994,
+        0.0092942388728261
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 95696,
+      "componentType": 5126,
+      "count": 1036,
+      "max": [
+        0.9954120516777039,
+        0.9915895462036133
+      ],
+      "min": [
+        0.008318355306982994,
+        0.0092942388728261
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 103984,
+      "componentType": 5126,
+      "count": 1036,
+      "max": [
+        0.9954120516777039,
+        0.9915895462036133
+      ],
+      "min": [
+        0.008318355306982994,
+        0.0092942388728261
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 45168,
+      "componentType": 5125,
+      "count": 3024,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Daniil Kulinich (https://sketchfab.com/dk_artist)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/bollard-1ccd0c761fc744a3a62e168044a9d2eb",
+      "title": "Bollard"
+    },
+    "generator": "Sketchfab-12.64.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 57264,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 112272,
+      "byteOffset": 57264,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 112272,
+      "byteOffset": 169536,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 74848,
+      "byteOffset": 281808,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 356656,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/Bollard_Bot_baseColor.png"
+    },
+    {
+      "uri": "textures/Bollard_Bot_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/Bollard_Bot_normal.png"
+    },
+    {
+      "uri": "textures/Bollard_Top_baseColor.png"
+    },
+    {
+      "uri": "textures/Bollard_Top_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/Bollard_Top_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Bollard_Bot",
+      "normalTexture": {
+        "index": 2
+      },
+      "occlusionTexture": {
+        "index": 1,
+        "strength": 0.5
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Bollard_Top",
+      "normalTexture": {
+        "index": 5
+      },
+      "occlusionTexture": {
+        "index": 4,
+        "strength": 0.5
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 3
+        },
+        "metallicRoughnessTexture": {
+          "index": 4
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Bollard_Stand_Bollard_Bot_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3,
+            "TEXCOORD_1": 4,
+            "TEXCOORD_2": 5
+          },
+          "indices": 6,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Bollard_Bollard_Top_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 8,
+            "POSITION": 7,
+            "TANGENT": 9,
+            "TEXCOORD_0": 10,
+            "TEXCOORD_1": 11,
+            "TEXCOORD_2": 12
+          },
+          "indices": 13,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "9c4dcc6791d94d2895a519933a5580e4.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4,
+        5
+      ],
+      "matrix": [
+        360.0000305175781,
+        0.0,
+        0.0,
+        0.0,
+        -0.0,
+        -4.8876203817549424e-05,
+        -299.999999999996,
+        0.0,
+        0.0,
+        599.999999999992,
+        -9.775240763509885e-05,
+        0.0,
+        -42608.27734375,
+        0.0,
+        20970.328125,
+        1.0
+      ],
+      "name": "Bollard_Stand"
+    },
+    {
+      "mesh": 0,
+      "name": "Bollard_Stand_Bollard_Bot_0"
+    },
+    {
+      "children": [
+        6
+      ],
+      "matrix": [
+        6.813481330871582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.176177978515625,
+        -1.0587911840678752e-22,
+        0.0,
+        0.0,
+        5.293955920339376e-23,
+        4.0880889892578125,
+        0.0,
+        0.0,
+        -7.62939453125e-06,
+        0.6583734750747681,
+        1.0
+      ],
+      "name": "Bollard"
+    },
+    {
+      "mesh": 1,
+      "name": "Bollard_Bollard_Top_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    },
+    {
+      "sampler": 0,
+      "source": 3
+    },
+    {
+      "sampler": 0,
+      "source": 4
+    },
+    {
+      "sampler": 0,
+      "source": 5
+    }
+  ]
+}

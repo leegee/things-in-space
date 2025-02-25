@@ -7,6 +7,7 @@ let targetLat = 47.4979, targetLng = 19.0402; // Example target location: Budape
 const EARTH_RADIUS_M = 6371000;
 
 let userLat, userLng;
+let model;
 
 // Convert GPS coordinates to AR coordinates (meters relative to user)
 function getARPosition(lat, lng) {
@@ -15,22 +16,26 @@ function getARPosition(lat, lng) {
   return { x: deltaLng, z: -deltaLat }; // Use negative deltaLat for proper front-back positioning
 }
 
-async function init() {
-  const { scene, camera, renderer } = setScene();
-  const model = await setModel(scene, '/cemetery_angel_-_miller/scene.gltf', [0, 0, -1]);// Test by setting 1m in front
+// Calculate distance between two GPS coordinates in meters - with thanks
+function getDistance(lat1, lon1, lat2, lon2) {
+  const φ1 = lat1 * Math.PI / 180;
+  const φ2 = lat2 * Math.PI / 180;
+  const Δφ = (lat2 - lat1) * Math.PI / 180;
+  const Δλ = (lon2 - lon1) * Math.PI / 180;
 
-  startLocationTracking(model);
+  const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+    Math.cos(φ1) * Math.cos(φ2) *
+    Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-  renderer.setAnimationLoop(() => {
-    renderer.render(scene, camera);
-  });
+  return EARTH_RADIUS_M * c;
 }
 
 async function setModel(scene, filepath, coords) {
   const loader = new GLTFLoader();
   await new Promise((resolve) => {
     loader.load(filepath, (gltf) => {
-      const model = gltf.scene;
+      model = gltf.scene;
       model.position.set(...coords);
       scene.add(model);
       resolve();
@@ -55,8 +60,7 @@ function setScene() {
   return { scene, camera, renderer };
 }
 
-// Directly request geolocation permissions and handle the response
-function startLocationTracking(model) {
+function startLocationTracking(camera) {
   if (!navigator.geolocation) {
     alert("Geolocation is not supported by your browser.");
     throw new Error("Geolocation API access impossible.");
@@ -67,15 +71,16 @@ function startLocationTracking(model) {
       userLat = position.coords.latitude;
       userLng = position.coords.longitude;
 
-      console.log(`Updated Location: ${userLat}, ${userLng}`);
-
-      if (model) {
-        const arPos = getARPosition(targetLat, targetLng);
-        model.position.set(arPos.x, 0, arPos.z);
-      }
-
       camera.position.set(0, 1.6, 0); // Keep camera at a natural height
       camera.lookAt(new THREE.Vector3(0, 0, -1));
+
+      // Calculate distance between user and target
+      const distance = getDistance(userLat, userLng, targetLat, targetLng);
+      if (distance < 100 && model) {
+        model.visible = true;
+      } else if (model) {
+        model.visible = false;
+      }
     },
     (error) => {
       console.error("Geolocation error:", error);
@@ -88,35 +93,18 @@ function startLocationTracking(model) {
   );
 }
 
-// Record point control
-document.getElementById('record-point').addEventListener('click', () => {
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      const accuracy = position.coords.accuracy; // Accuracy in meters
+async function init() {
+  const { scene, camera, renderer } = setScene();
+  await setModel(scene, '/cemetery_angel_-_miller/scene.gltf', [0, 0, -1]); // Test by setting 1m in front
 
-      const locationData = { latitude, longitude, accuracy };
+  startLocationTracking(camera);
 
-      fetch('//api/record-location', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(locationData)
-      });
+  // const arPos = getARPosition(targetLat, targetLng);
+  // model.position.set(arPos.x, 0, arPos.z);
 
-      alert(`Your location is: Latitude: ${latitude}, Longitude: ${longitude} (Accuracy: ${accuracy} meters)`);
-    },
-    (error) => {
-      alert("Error: Unable to retrieve location. " + error.toString());
-    },
-    {
-      enableHighAccuracy: true,
-      timeout: 5000,  // Timeout after 5 seconds
-      maximumAge: 0  // No cached position
-    }
-  );
-});
+  renderer.setAnimationLoop(() => {
+    renderer.render(scene, camera);
+  });
+}
 
 init();

@@ -47,6 +47,10 @@ export default defineConfig({
 function createApi() {
     const app = express();
     app.use(express.json());
+    app.put('/api/log', (req, res) => {
+        console.log('log: ', JSON.stringify(req.body, null, 4));
+        res.json({ ok: true });
+    });
     app.post('/api/record-location', (req, res) => {
         const { latitude, longitude, accuracy } = req.body;
         console.log(`Received location: Latitude ${latitude}, Longitude ${longitude}, Accuracy: ${accuracy} meters`);
