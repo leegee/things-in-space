@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Things in Space</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #ui-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      /* Ensure the UI is always on top */
+      pointer-events: auto;
+      /* Ensure that UI elements are clickable */
+    }
+
+    #light-control {
+      padding: 10pt;
+      border-radius: 5pt;
+    }
+
+    #light-control,
+    #XRButton {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    #light-intensity {
+      width: 200px;
+    }
+
+    button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 1rem;
+      font-size: 1rem;
+      border-radius: 50%;
+      max-width: 1em;
+      min-width: 1em;
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside id="ui-container">
+    <div id="light-control">
+      <input type="range" id="light-intensity" alt="Light Intensity" min="0" max="5" step="0.1" value="2">
+    </div>
+    <input type="button" id="record-point" value="+">
+  </aside>
+
+  <!-- Vite will inject the bundled script here -->
+  <script type="module" src="/src/main.js"></script>
+
+</body>
+
+</html>

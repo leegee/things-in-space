@@ -1,0 +1,20 @@
+{
+  "name": "things-in-space",
+  "description": "html-xr-api-test",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite -- --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "mkcert": "mkdir certs; mkcert 192.168.1.108 localhost 127.0.0.1 && mv 192.168.1.108+2.pem certs/local.pem && mv 192.168.1.108+2-key.pem certs/local-key.pem && openssl x509 -outform der -in certs/local.pem -out certs/local.crt"
+  },
+  "dependencies": {
+    "three": "^0.173.0"
+  },
+  "devDependencies": {
+    "express": "^4.21.2",
+    "vite": "^6.1.0"
+  }
+}
