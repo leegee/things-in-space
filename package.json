@@ -11,10 +11,15 @@
     "mkcert": "mkdir certs; mkcert 192.168.1.108 localhost 127.0.0.1 && mv 192.168.1.108+2.pem certs/local.pem && mv 192.168.1.108+2-key.pem certs/local-key.pem && openssl x509 -outform der -in certs/local.pem -out certs/local.crt"
   },
   "dependencies": {
-    "three": "^0.173.0"
+    "@types/node": "^24.6.2",
+    "@types/three": "^0.180.0",
+    "three": "^0.173.0",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "express": "^4.21.2",
-    "vite": "^6.1.0"
+    "vite": "^6.1.0",
+    "vite-plugin-qrcode": "^0.3.0",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

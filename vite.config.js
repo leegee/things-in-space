@@ -1,60 +1,71 @@
-import fs from 'fs';
-import os from 'os';
+import fs from 'node:fs';
+import os from 'node:os';
 import express from 'express';
 import { defineConfig } from 'vite';
-
+import { qrcode } from 'vite-plugin-qrcode';
+import tsconfigPaths from "vite-tsconfig-paths";
 const port = 5173;
 
+// Get first non-loopback IPv4 address
 function getLocalIP() {
     const interfaces = os.networkInterfaces();
-    for (let interfaceName in interfaces) {
-        const interfaceDetails = interfaces[interfaceName];
-        for (let i = 0; i < interfaceDetails.length; i++) {
-            const { family, address } = interfaceDetails[i];
-            if (family === 'IPv4' && address !== '127.0.0.1') {
-                return address;  // Return first non-loopback IPv4 address
+    for (const name in interfaces) {
+        const iface = interfaces[name];
+        for (const i of iface) {
+            if (i.family === 'IPv4' && i.address !== '127.0.0.1') {
+                return i.address;
             }
         }
     }
-    throw new Error('Could not determine local IP address.');
+    return 'localhost';
 }
 
 const localIP = getLocalIP();
 
 export default defineConfig({
     server: {
-        port: port,
-        host: localIP,
-        https: {
+        port,
+        host: '0.0.0.0', // Bind all interfaces so network access works
+        https: fs.existsSync('./certs/local.pem') && fs.existsSync('./certs/local-key.pem') ? {
             key: fs.readFileSync('./certs/local-key.pem'),
             cert: fs.readFileSync('./certs/local.pem'),
-        },
+        } : undefined,
     },
     plugins: [
+        tsconfigPaths(),
+
+        // Express API plugin
         {
             name: 'express-api-plugin',
             configureServer(viteServer) {
-                const apiApp = createApi();
-                // Attach the Express app to the Vite server instance correctly
+                const apiApp = express();
+                apiApp.use(express.json());
+
+                apiApp.put('/api/log', (req, res) => {
+                    console.log('log:', req.body);
+                    res.json({ ok: true });
+                });
+
+                apiApp.post('/api/record-location', (req, res) => {
+                    console.log('Location received:', req.body);
+                    res.json({ ok: true, ...req.body });
+                });
+
                 viteServer.middlewares.use('/api', apiApp);
+            },
+        },
 
-                console.log(`Express API server is running at https://${localIP}:${port}`);
-            }
-        }
-    ]
+        // QR code plugin
+        qrcode({
+            // Optional: specify custom URLs to include both localhost and network IP
+            getUrl: (config) => {
+                const protocol = config.server.https ? 'https' : 'http';
+                const urls = [
+                    `${protocol}://localhost:${config.server.port}`,
+                    `${protocol}://${localIP}:${config.server.port}`,
+                ];
+                return urls;
+            },
+        }),
+    ],
 });
-
-function createApi() {
-    const app = express();
-    app.use(express.json());
-    app.put('/api/log', (req, res) => {
-        console.log('log: ', JSON.stringify(req.body, null, 4));
-        res.json({ ok: true });
-    });
-    app.post('/api/record-location', (req, res) => {
-        const { latitude, longitude, accuracy } = req.body;
-        console.log(`Received location: Latitude ${latitude}, Longitude ${longitude}, Accuracy: ${accuracy} meters`);
-        res.json({ ok: true, message: 'Location recorded successfully', ...req.body });
-    });
-    return app;
-}
